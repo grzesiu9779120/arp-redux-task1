@@ -1,4 +1,5 @@
 import "./App.css";
+import ToDoList from "./ToDoList/ToDoList";
 
 import { useApp } from "./useApp";
 
@@ -46,6 +47,7 @@ function App(): JSX.Element {
           MULTIPLY
         </button>
       </div>
+      <ToDoList />
     </div>
   );
 }
