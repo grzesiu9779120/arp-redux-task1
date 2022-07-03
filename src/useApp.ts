@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useAppDispatch } from "./store/hooks/useAppDispach";
+import { useAppSelector } from "./store/hooks/useAppSelector";
 import { bindActionCreators } from "redux";
 import { RootStoreType } from "./store/store";
 import * as counterActions from "./store/counter";
@@ -9,10 +9,10 @@ export const useApp = () => {
   const [divide, setDivide] = useState<number>(0);
   const [multiply, setMultiply] = useState<number>(0);
 
-  const counterState = useSelector(
+  const counterState = useAppSelector(
     (state: RootStoreType) => state.counter.value
   );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     counterDecrementAction,

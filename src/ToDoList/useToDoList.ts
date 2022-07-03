@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../store/hooks/useAppDispach";
+import { useAppSelector } from "../store/hooks/useAppSelector";
 import { bindActionCreators } from "redux";
 import { RootStoreType } from "../store/store";
 
@@ -11,20 +11,27 @@ export const useToDoList = () => {
   const [description, setDescription] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
   const [score, setScore] = useState<number>(0);
+  const [id, setId] = useState<number>(0);
 
-  const toDoListState = useSelector(
+  const toDoListState = useAppSelector(
     (state: RootStoreType) => state.tasks.tasks
   );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { toDoListAddTask } = useMemo(
-    () => bindActionCreators(toDoListActions, dispatch),
-    [dispatch]
-  );
+  const {
+    toDoListAddTask,
+
+    //  toDoListDeleteTask
+  } = useMemo(() => bindActionCreators(toDoListActions, dispatch), [dispatch]);
 
   const handleAddTask = useCallback(() => {
-    toDoListAddTask({ task: { title, description, author, score } });
-  }, [toDoListAddTask]);
+    toDoListAddTask({ task: { title, description, author, score, id } });
+  }, [author, description, score, title, id, toDoListAddTask]);
+
+  // const hadleDeleteTask = useCallback(() => {
+
+  //   toDoListDeleteTask({ id: { id } });
+  // }, [id]);
 
   const handleChangeTitle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);

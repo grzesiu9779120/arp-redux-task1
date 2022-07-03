@@ -1,7 +1,16 @@
-import "./App.css";
+import { useMemo } from "react";
+import { bindActionCreators } from "redux";
+
+import { incrementActions } from "./store/counter-toolkit/actions/counter-increment.actions";
+import { useAppDispatch } from "./store/hooks/useAppDispach";
 import ToDoList from "./ToDoList/ToDoList";
 
 import { useApp } from "./useApp";
+
+import "./App.css";
+import { addProduct } from "./store/basket/basketSlice";
+import { useAppSelector } from "./store/hooks/useAppSelector";
+import Basket from "./Basket/Basket";
 
 function App(): JSX.Element {
   const {
@@ -17,6 +26,13 @@ function App(): JSX.Element {
     handlePowByValue,
     multiply,
   } = useApp();
+
+  const dispatch = useAppDispatch();
+
+  const { increment } = useMemo(
+    () => bindActionCreators({ increment: incrementActions }, dispatch),
+    [dispatch]
+  );
 
   return (
     <div className="App">
@@ -46,8 +62,10 @@ function App(): JSX.Element {
         <button type="button" onClick={handleMultiply}>
           MULTIPLY
         </button>
+        <button onClick={() => increment}>INCREMENT "TOOLKIT"</button>
       </div>
       <ToDoList />
+      <Basket />
     </div>
   );
 }
