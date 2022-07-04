@@ -17,3 +17,11 @@ export const AddButton = styled.div`
   padding: 10px;
   font-weight: 600;
 `;
+
+export const RemoveButton  = styled.div`
+  width: fit-content;
+  border-radius: 5px;
+  background-color: red;
+  padding: 10px;
+  font-weight: 600;
+`;

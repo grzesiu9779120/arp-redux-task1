@@ -5,7 +5,6 @@ import * as S from "./Basket.style";
 
 const Basket = () => {
   const basketState = useAppSelector((state) => state.basket);
-  console.log(basketState.basket);
 
   return (
     <S.Container>

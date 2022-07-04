@@ -1,5 +1,5 @@
 import { IProduct } from "../../../mocks/products";
-import { addProduct } from "../../../store/basket/basketSlice";
+import { addProduct, removeProduct } from "../../../store/basket/basketSlice";
 import { useAppDispatch } from "../../../store/hooks/useAppDispach";
 import { useAppSelector } from "../../../store/hooks/useAppSelector";
 
@@ -28,6 +28,11 @@ const Product = ({ id, title, price }: IProduct) => {
       >
         ADD
       </S.AddButton>
+      <S.RemoveButton onClick={() =>
+          dispatch(removeProduct({id}))
+        }>
+        REMOVE
+      </S.RemoveButton>
     </S.Container>
   );
 };
